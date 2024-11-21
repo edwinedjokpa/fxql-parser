@@ -1,11 +1,15 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { HttpErrorExceptionFilter } from './utils/https-error.exception';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
+  const logger = new Logger();
   const app = await NestFactory.create(AppModule);
+  const configService = app.get(ConfigService);
+  const PORT = configService.getOrThrow('PORT') || 3000;
 
   // Swagger configuration
   const config = new DocumentBuilder()
@@ -19,6 +23,8 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new HttpErrorExceptionFilter());
-  await app.listen(3000);
+
+  await app.listen(PORT);
+  logger.log(`App is listening on :${PORT}`);
 }
 bootstrap();

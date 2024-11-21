@@ -56,6 +56,7 @@ To run this application locally, you need the following tools:
    DB_USERNAME=youruser
    DB_PASSWORD=yourpassword
    DB_SSL_MODE=true
+   PORT=3000
    ```
 
 5. Start the application:
@@ -285,3 +286,11 @@ This setup allows users to interact with your API, explore available endpoints, 
   ]
 }
 ```
+
+# Throttler Module for Rate Limiting
+
+## Overview
+
+The **Throttler Module** provides an easy way to implement **rate limiting** in a NestJS application. Rate limiting controls the number of requests a user can make to the server in a specified time window. This is essential for protecting APIs from overuse, abuse, and mitigating denial-of-service (DoS) attacks. By limiting the rate of incoming requests, you ensure fair usage of resources and maintain the server’s stability.
+
+This guide explains how to set up and configure the Throttler module in a NestJS project, including basic and advanced configurations.
